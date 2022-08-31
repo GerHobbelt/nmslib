@@ -19,11 +19,11 @@
 #include <math.h>
 #include <malloc.h>
 
-const long long max_size = 2000;         // max length of strings
-const long long N = 40;                  // number of closest words that will be shown
-const long long max_w = 50;              // max length of vocabulary entries
+#define max_size  2000             // max length of strings
+const int N = 40;                  // number of closest words that will be shown
+const int max_w = 50;              // max length of vocabulary entries
 
-int main(int argc, char **argv) {
+int main(int argc, const char **argv) {
   FILE *f;
   char file_name[max_size];
   float len;
