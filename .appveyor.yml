@@ -11,14 +11,12 @@ environment:
     # SSE2 is the default in recent VS, but let's keep for older versions, see, e.g.: https://github.com/weidai11/cryptopp/issues/445
     ARCH: SSE2
   matrix:
-  - PYTHON: 35
-  - PYTHON: 36
-  - PYTHON: 37
-  - PYTHON: 38
-  - PYTHON: 39
   - PYTHON: 310
-  - PYTHON: 311
+  - PYTHON: 39
+  - PYTHON: 38
   - PYTHON: 312
+  - PYTHON: 311
+  - PYTHON: 37
   pypipassword:
     # https://ci.appveyor.com/tools/encrypt
     secure: 7hxZ+XinYPLuIS1aHZbTcA==
@@ -33,7 +31,7 @@ install:
     $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
     echo $env:PATH
     python -m pip install --disable-pip-version-check --upgrade pip
-    python -m pip install -qq setuptools six psutil
+    python -m pip install -qq setuptools six psutil scikit-learn pytest pytest-runner
 - cmd: |
     ECHO Platform : %PLATFORM%
     ECHO Python : %PYTHON%
@@ -51,7 +49,7 @@ build_script:
 
 test_script:
 - ps: cd python_bindings
-- cmd: python setup.py test
+- cmd: pytest tests
 - ps: cd ..
 
 deploy_script: 

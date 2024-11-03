@@ -151,9 +151,8 @@ class BuildExt(build_ext):
             if has_flag(self.compiler, '-fvisibility=hidden'):
                 opts.append('-fvisibility=hidden')
         elif ct == 'msvc':
-            # Leo has no idea why escaping works differently for MSVC
+            # Leo has no idea why escaping used to work differently for MSVC
             # and Python 3.9, but it is required for Python 3.8 and earlier:
-            # weird 
             esc_char = '\\' if py_version < (3, 9) else ''
             
             opts.append('/DVERSION_INFO=%s"%s%s"' % (esc_char, self.distribution.get_version(), esc_char))
@@ -193,6 +192,5 @@ setup(
     install_requires=dep_list,
     setup_requires=dep_list,
     cmdclass={'build_ext': BuildExt},
-    test_suite="tests",
     zip_safe=False,
 )
